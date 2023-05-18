@@ -734,7 +734,7 @@ public class StressProfile implements Serializable
         }
     }
 
-    static class ColumnInfo
+    public static class ColumnInfo
     {
         final String name;
         final String type;
@@ -754,7 +754,7 @@ public class StressProfile implements Serializable
             return getGenerator(name, type, collectionType, config);
         }
 
-        static Generator getGenerator(final String name, final String type, final String collectionType, GeneratorConfig config)
+        public static Generator getGenerator(final String name, final String type, final String collectionType, GeneratorConfig config)
         {
             switch (type.toUpperCase())
             {
@@ -799,6 +799,8 @@ public class StressProfile implements Serializable
                     return new Sets(name, getGenerator(name, collectionType, null, config), config);
                 case "LIST":
                     return new Lists(name, getGenerator(name, collectionType, null, config), config);
+                case "MAP":
+                    return new Maps(name, config);
                 default:
                     throw new UnsupportedOperationException("Because of this name: "+name+" if you removed it from the yaml and are still seeing this, make sure to drop table");
             }
